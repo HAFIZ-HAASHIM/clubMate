@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClubMate Enterprise - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="invitation-styles.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <button id="mobile-menu-toggle" class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="logo-text">ClubMate</span>
+                    <span class="badge">Enterprise</span>
+                </div>
+            </div>
+
+            <div class="search-nav-container">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search..." class="search-input">
+                </div>
+
+                <nav class="main-nav">
+                    <button class="nav-button active">Dashboard</button>
+                    <button class="nav-button">Analytics</button>
+                    <button class="nav-button">Calendar</button>
+                    <button class="nav-button">Settings</button>
+                </nav>
+            </div>
+
+            <div class="user-actions">
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-indicator"></span>
+                </div>
+
+                <div class="user-profile">
+                    <img id="user-avatar" src="https://ui-avatars.com/api/?name=Demo+User&background=3b82f6&color=fff" alt="User" class="avatar">
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="dropdown-header">
+                            <div id="user-name">Muhammad Haashim</div>
+                            <div id="user-email" class="user-email">haashimmuhammad7@gmail.com</div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" id="logout-button">
+                            <i class="fas fa-sign-out-alt"></i> Log out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-search">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search..." class="search-input">
+        </div>
+
+        <nav class="mobile-nav">
+            <button class="mobile-nav-button active">Dashboard</button>
+            <button class="mobile-nav-button">Analytics</button>
+            <button class="mobile-nav-button">Calendar</button>
+            <button class="mobile-nav-button">Settings</button>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Club Management Suite</h1>
+                <p class="subtitle">Professional tools to streamline your organization's operations</p>
+            </div>
+
+            <!-- Welcome Banner -->
+            <div class="welcome-banner" id="welcome-banner">
+                <div class="welcome-content">
+                    <h2>Welcome back, <span id="welcome-name">Muhammad Haashim</span>!</h2>
+                    <p>Your last login was <span id="last-login">today</span>.</p>
+                </div>
+                <button class="close-banner" id="close-banner">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Upcoming Events</h3>
+                        <div class="stat-value">3</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Pending Tasks</h3>
+                        <div class="stat-value">7</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Team Members</h3>
+                        <div class="stat-value">12</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Communications</h3>
+                        <div class="stat-value">24</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-heading">Tools</h3>
+                        <div class="sidebar-links">
+                            <button class="sidebar-link active" data-tab="email">
+                                <i class="fas fa-envelope"></i>
+                                Communication
+                            </button>
+                            <button class="sidebar-link" data-tab="poster">
+                                <i class="fas fa-file-alt"></i>
+                                Marketing Materials
+                            </button>
+                            <button class="sidebar-link" data-tab="task">
+                                <i class="fas fa-users"></i>
+                                Team Management
+                            </button>
+                            <button class="sidebar-link" data-tab="ideas">
+                                <i class="fas fa-lightbulb"></i>
+                                Strategic Planning
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-divider"></div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-heading">Analytics</h3>
+                        <div class="sidebar-links">
+                            <button class="sidebar-link">
+                                <i class="fas fa-chart-bar"></i>
+                                Reports
+                            </button>
+                            <button class="sidebar-link">
+                                <i class="fas fa-calendar"></i>
+                                Events Calendar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-divider"></div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-heading">Settings</h3>
+                        <button class="sidebar-link">
+                            <i class="fas fa-cog"></i>
+                            Preferences
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- Mobile Tool Selector -->
+                <div class="mobile-tool-selector">
+                    <select id="tool-select">
+                        <option value="email">Communication</option>
+                        <option value="poster">Marketing Materials</option>
+                        <option value="task">Team Management</option>
+                        <option value="ideas">Strategic Planning</option>
+                    </select>
+                </div>
+
+                <!-- Content Area -->
+                <div class="content-area">
+                    <!-- Email Generator -->
+                    <div class="card tool-section" id="email-tool">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-envelope"></i>
+                                Professional Communication Suite
+                            </h2>
+                            <p class="card-description">
+                                Generate professional emails and communications for your organization
+                            </p>
+                        </div>
+                        <div class="card-content">
+                            <div class="tabs">
+                                <div class="tabs-list">
+                                    <button class="tab-trigger active" data-tab="event-tab">Event Invitation</button>
+                                    <button class="tab-trigger" data-tab="announcement-tab">Announcement</button>
+                                    <button class="tab-trigger" data-tab="follow-up-tab">Follow-up</button>
+                                </div>
+                                
+                                <div class="tab-content active" id="event-tab">
+                                    <div class="invitation-type-selector">
+                                        <div class="invitation-type-heading">Select invitation type:</div>
+                                        <div class="invitation-type-options">
+                                            <button id="gmail-option" class="invitation-option active">
+                                                <i class="fas fa-envelope"></i>
+                                                Gmail
+                                            </button>
+                                            <button id="whatsapp-option" class="invitation-option">
+                                                <i class="fab fa-whatsapp"></i>
+                                                WhatsApp
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="eventName">Event Name</label>
+                                            <input type="text" id="eventName" placeholder="Enter event name" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eventDate">Date</label>
+                                            <input type="text" id="eventDate" placeholder="Enter date" class="form-input">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="eventLocation">Location</label>
+                                        <input type="text" id="eventLocation" placeholder="Enter location" class="form-input">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="eventAgenda">Agenda or Description</label>
+                                        <textarea id="eventAgenda" placeholder="Enter agenda or description" class="form-textarea"></textarea>
+                                    </div>
+
+                                    <div id="recipient-info" class="form-group">
+                                        <label for="recipientEmail" id="recipient-label">Recipient Email</label>
+                                        <input type="email" id="recipientEmail" placeholder="Enter recipient email" class="form-input">
+                                    </div>
+
+                                    <button id="generate-email" class="primary-button">
+                                        <i class="fas fa-paper-plane"></i>
+                                        <span id="generate-button-text">Generate Email Invitation</span>
+                                    </button>
+
+                                    <div id="email-output-container" class="output-container hidden">
+                                        <div class="output-actions">
+                                            <button id="copy-email" class="icon-button">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                            <button id="send-invitation" class="icon-button">
+                                                <i class="fas fa-share"></i>
+                                            </button>
+                                        </div>
+                                        <pre id="email-output" class="output-content"></pre>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content" id="announcement-tab">
+                                    <div class="placeholder-content">
+                                        <h3>Announcement Template</h3>
+                                        <p>Coming soon in the next update</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content" id="follow-up-tab">
+                                    <div class="placeholder-content">
+                                        <h3>Follow-up Template</h3>
+                                        <p>Coming soon in the next update</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Poster Creator -->
+                    <div class="card tool-section hidden" id="poster-tool">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-file-alt"></i>
+                                Marketing Materials Generator
+                            </h2>
+                            <p class="card-description">
+                                Create professional marketing materials for your events and initiatives
+                            </p>
+                        </div>
+                        <div class="card-content">
+                            <div class="tabs">
+                                <div class="tabs-list">
+                                    <button class="tab-trigger active" data-tab="poster-tab">Event Poster</button>
+                                    <button class="tab-trigger" data-tab="social-tab">Social Media</button>
+                                    <button class="tab-trigger" data-tab="presentation-tab">Presentation</button>
+                                </div>
+                                
+                                <div class="tab-content active" id="poster-tab">
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="eventTitle">Event Title</label>
+                                            <input type="text" id="eventTitle" placeholder="Enter event title" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eventTheme">Theme</label>
+                                            <select id="eventTheme" class="form-select">
+                                                <option value="corporate">Corporate</option>
+                                                <option value="modern">Modern</option>
+                                                <option value="creative">Creative</option>
+                                                <option value="minimal">Minimal</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-grid-3">
+                                        <div class="form-group">
+                                            <label for="posterDate">Date</label>
+                                            <input type="text" id="posterDate" placeholder="Enter date" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="posterTime">Time</label>
+                                            <input type="text" id="posterTime" placeholder="Enter time" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="posterVenue">Venue</label>
+                                            <input type="text" id="posterVenue" placeholder="Enter venue" class="form-input">
+                                        </div>
+                                    </div>
+
+                                    <button id="create-poster" class="primary-button">
+                                        <i class="fas fa-file-alt"></i>
+                                        Generate Professional Poster
+                                    </button>
+
+                                    <div id="poster-output" class="poster-container">
+                                        <div class="poster">
+                                            <div class="poster-header"></div>
+                                            <div class="poster-content">
+                                                <div class="poster-theme-badge" id="poster-theme-badge">Corporate</div>
+                                                <h2 id="poster-title">Professional Event Title</h2>
+                                                <p class="poster-organizer">Organized by ClubMate Enterprise</p>
+                                            </div>
+                                            <div class="poster-details">
+                                                <div class="poster-detail">
+                                                    <i class="fas fa-calendar"></i>
+                                                    <span id="poster-date">May 25, 2025</span>
+                                                </div>
+                                                <div class="poster-detail">
+                                                    <i class="fas fa-clock"></i>
+                                                    <span id="poster-time">10:00 AM - 4:00 PM</span>
+                                                </div>
+                                                <div class="poster-detail">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <span id="poster-venue">Enterprise Conference Center</span>
+                                                </div>
+                                            </div>
+                                            <div class="poster-background"></div>
+                                        </div>
+                                        <div class="poster-actions">
+                                            <button id="download-poster" class="outline-button">
+                                                <i class="fas fa-download"></i>
+                                                Download Poster
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content" id="social-tab">
+                                    <div class="placeholder-content">
+                                        <h3>Social Media Content</h3>
+                                        <p>Coming soon in the next update</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content" id="presentation-tab">
+                                    <div class="placeholder-content">
+                                        <h3>Presentation Templates</h3>
+                                        <p>Coming soon in the next update</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Assigner -->
+                    <div class="card tool-section hidden" id="task-tool">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-users"></i>
+                                Team Management System
+                            </h2>
+                            <p class="card-description">
+                                Efficiently manage your team, assign tasks, and track progress
+                            </p>
+                        </div>
+                        <div class="card-content">
+                            <div class="tabs">
+                                <div class="tabs-list">
+                                    <button class="tab-trigger active" data-tab="assign-tab">Task Assignment</button>
+                                    <button class="tab-trigger" data-tab="progress-tab">Progress Tracking</button>
+                                    <button class="tab-trigger" data-tab="team-tab">Team Analytics</button>
+                                </div>
+                                
+                                <div class="tab-content active" id="assign-tab">
+                                    <div class="form-group">
+                                        <label for="members">Team Members</label>
+                                        <textarea id="members" placeholder="Enter comma-separated member names" class="form-textarea"></textarea>
+                                        <p class="form-hint">Example: John Smith, Jane Doe, Alex Johnson</p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tasks">Tasks</label>
+                                        <textarea id="tasks" placeholder="Enter comma-separated tasks" class="form-textarea"></textarea>
+                                        <p class="form-hint">Example: Prepare presentation, Contact vendors, Create budget report</p>
+                                    </div>
+
+                                    <button id="assign-tasks" class="primary-button">
+                                        <i class="fas fa-users"></i>
+                                        Assign Tasks to Team
+                                    </button>
+
+                                    <div id="task-output-container" class="task-assignments hidden">
+                                        <h3>Task Assignments</h3>
+                                        <div class="assignments-table">
+                                            <div class="table-header">
+                                                <div>Team Member</div>
+                                                <div></div>
+                                                <div>Assigned Task</div>
+                                            </div>
+                                            <div id="assignments-list" class="table-body">
+                                                <!-- Task assignments will be inserted here -->
+                                            </div>
+                                        </div>
+
+                                        <div class="assignments-actions">
+                                            <button id="export-assignments" class="outline-button">
+                                                <i class="fas fa-download"></i>
+                                                Export Assignments
+                                            </button>
+                                            <button id="save-assignments" class="primary-button">
+                                                <i class="fas fa-save"></i>
+                                                Save Assignments
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content" id="progress-tab">
+                                    <div class="placeholder-content">
+                                        <h3>Progress Tracking</h3>
+                                        <p>Coming soon in the next update</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content" id="team-tab">
+                                    <div class="placeholder-content">
+                                        <h3>Team Analytics</h3>
+                                        <p>Coming soon in the next update</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Ideas -->
+                    <div class="card tool-section hidden" id="ideas-tool">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-lightbulb"></i>
+                                Strategic Planning Assistant
+                            </h2>
+                            <p class="card-description">
+                                Generate professional event ideas and strategic initiatives for your organization
+                            </p>
+                        </div>
+                        <div class="card-content">
+                            <div class="tabs">
+                                <div class="tabs-list">
+                                    <button class="tab-trigger active" data-tab="events-tab">Event Planning</button>
+                                    <button class="tab-trigger" data-tab="initiatives-tab">Strategic Initiatives</button>
+                                    <button class="tab-trigger" data-tab="roadmap-tab">Roadmap Builder</button>
+                                </div>
+                                
+                                <div class="tab-content active" id="events-tab">
+                                    <div class="form-grid-3">
+                                        <div class="form-group">
+                                            <label for="clubType">Organization Type</label>
+                                            <select id="clubType" class="form-select">
+                                                <option value="tech">Technology</option>
+                                                <option value="business">Business</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="audience">Target Audience</label>
+                                            <select id="audience" class="form-select">
+                                                <option value="professionals">Professionals</option>
+                                                <option value="students">Students</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="budget">Budget Range</label>
+                                            <select id="budget" class="form-select">
+                                                <option value="low">Low Budget</option>
+                                                <option value="medium">Medium Budget</option>
+                                                <option value="high">High Budget</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <button id="suggest-events" class="primary-button">
+                                        <i class="fas fa-lightbulb"></i>
+                                        Generate Strategic Event Ideas
+                                    </button>
+
+                                    <div id="ideas-output-container" class="ideas-container hidden">
+                                        <h3>Strategic Event Recommendations</h3>
+                                        <div id="ideas-list" class="ideas-list">
+                                            <!-- Event ideas will be inserted here -->
+                                        </div>
+
+                                        <div class="ideas-actions">
+                                            <button id="export-ideas" class="outline-button">
+                                                <i class="fas fa-download"></i>
+                                                Export Ideas
+                                            </button>
+                                            <button id="save-ideas" class="primary-button">
+                                                <i class="fas fa-save"></i>
+                                                Save Ideas
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content" id="initiatives-tab">
+                                    <div class="placeholder-content">
+                                        <h3>Strategic Initiatives</h3>
+                                        <p>Coming soon in the next update</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-content" id="roadmap-tab">
+                                    <div class="placeholder-content">
+                                        <h3>Roadmap Builder</h3>
+                                        <p>Coming soon in the next update</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <span class="logo-text">ClubMate Enterprise</span>
+                <span class="copyright">© 2025</span>
+            </div>
+
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logout-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Confirm Logout</h3>
+                <button class="modal-close" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <p>Are you sure you want to log out of your account?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="outline-button" id="cancel-logout">Cancel</button>
+                <button class="primary-button" id="confirm-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <div class="toast-title" id="toast-title">Notification</div>
+            <div class="toast-message" id="toast-message">This is a notification message.</div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Your Firebase config must be loaded before your main script -->
+    <script src="firebase-config.js"></script>
+
+    <!-- Add a debug button for testing (you can remove this later) -->
+    <script>
+        // Add a debug button to manually hide the auth check overlay
+        window.addEventListener('DOMContentLoaded', function() {
+            const authCheck = document.getElementById('auth-check');
+            if (authCheck) {
+                const debugButton = document.createElement('button');
+                debugButton.textContent = 'Debug: Skip Auth Check';
+                debugButton.style.marginTop = '20px';
+                debugButton.style.padding = '10px';
+                debugButton.style.background = '#f59e0b';
+                debugButton.style.color = 'white';
+                debugButton.style.border = 'none';
+                debugButton.style.borderRadius = '4px';
+                debugButton.style.cursor = 'pointer';
+                
+                debugButton.addEventListener('click', function() {
+                    console.log('Debug: Manually hiding auth check overlay');
+                    authCheck.classList.add('hidden');
+                });
+                
+                authCheck.querySelector('.auth-check-content').appendChild(debugButton);
+            }
+        });
+    </script>
+
+    <script src="script.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
